@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script >
+        //indicamos las variables para nuestro producto
+        var nombreProducto1=0, nombreProducto2=0, nombreProducto3=0;
+        var precioPruducto1=0, precioPruducto2=0, precioPruducto3=0;
+        var stockProducto1=0, stockProducto2=0, stockProducto3=0;
+        var historial="Historial:";
+
+        function inicioPrograma(){ //Esta funcion es el primer paso para poner el programa en funcionamiento
+            alert("Empezaremos a registrar los producto de la página");
+            alert("Primer producto:");
+            registroProducto(nombreProducto1,precioPruducto1,stockProducto1);
+            alert("Segundo producto:");
+            registroProducto(nombreProducto2,precioPruducto2,stockProducto2);
+            alert("Tercer producto:");
+            registroProducto(nombreProducto3,precioPruducto3,stockProducto3);
+            menu();
+        }
+        function validaDato(elDato, String){ //String es un booleano del tipo de dato a validar
+            if(String){
+                return elDato;
+            }else{
+                while(isNaN(elDato)){
+                    elDato=prompt("No has introducido un número");
+                    
+                }
+                return parseFloat(elDato);
+            }
+        }
+        function registroProducto(nombre,precio,cantidad) { //Esta funcion nos registrara todos los productos
+            alert("Registro de producto");
+            nombre=validaDato(prompt("introduzca el nombre de su producto"),true);
+            precio=validaDato(prompt("Introduzca el precio de su producto N.N"),false);
+            cantidad=parseInt(validaDato(prompt("Introduzca la cantidad de este producto"),false));
+        }
+        
+        function pruebaProductos(){ //Método de testeo de los productos
+            nombreProducto1="camisetas"; nombreProducto2="zapas"; nombreProducto3="corbatas";
+            precioPruducto1=33.3; precioPruducto2=10.2; precioPruducto3=444.4;
+            stockProducto1=3; stockProducto2=40; stockProducto3=444;
+        }
+
+        function menu(){ // El menu principal de programa
+            salida=false;
+            alert("Una vez introduccido los productos ya esta arrancado el programa, bienvenido")
+            do {
+                alert("Elija una de las opciones:\nA: ver inventario\nB: Añadir Stock\nC: Registro de venta"
+                    +"\nD: Historial de movimientos\nE: Cambia precio producto")
+                switch (prompt("Elija:")) {
+                    case "A":
+                        inventario();
+                        break;
+                    case "B":
+                        añadirStock();
+                        break;
+                    case "C":
+                        RegistroVenta();
+                        break;
+                    case "D":
+                        alert(historial);
+                        break;
+                    case "E":
+                        cambiaPrecio();
+                        break;                
+                    
+                    default:
+                        alert("No has elegido una opción válida");
+                        break;
+                }
+            } while (!salida);
+
+        }
+
+        function inventario(){ //Muestra del almacen
+            alert("Producto 1: \nNombre: "+ nombreProducto1+"\nPrecio: "+precioPruducto1+"\nCantidad: " +stockProducto1+
+            "Producto 2: \nNombre: "+ nombreProducto2+"\nPrecio: "+precioPruducto2+"\nCantidad: " +stockProducto2+
+            "Producto 3: \nNombre: "+ nombreProducto3+"\nPrecio: "+precioPruducto3+"\nCantidad: " +stockProducto3);
+        }
+
+        function añadirStock(){
+            let producto=prompt("Menciona el producto al que le quieres añadir stock");
+            switch (producto) {
+                case nombreProducto1:
+                    stockProducto1+=validaDato(prompt("Indica que cantidad quieres añadir"),false);
+                    historial+="\n Se ha cambiado el stock de: " +nombreProducto1;
+                    break;
+                case nombreProducto2:
+                    stockProducto2+=validaDato(prompt("Indica que cantidad quieres añadir"),false);
+                    historial+="\n Se ha cambiado el stock de: " +nombreProducto2;
+                    break;
+                
+                case nombreProducto3:
+                    stockProducto3+=validaDato(prompt("Indica que cantidad quieres añadir"),false);
+                    historial+="\n Se ha cambiado el stock de: "+nombreProducto3;
+                    break;    
+            
+                default:
+                    alert("Producto no encontrado");
+                    historial+="\nNo se a encontrado el producto"
+                    break;
+            }
+
+        }
+        function compruebaCantidad(cantidadProducto,cantidadVenta){
+            if(cantidadVenta<0){
+                alert("No puedes vender una cantidad negativa");
+                info+="\nSe intento hacer una venta negativa (¿En que estabas pensando?)";
+            }else{
+                if((cantidadProducto-cantidadVenta)<0){
+                    alert("No puedes vender mas del stock que tienes");
+                    info+="\nNo se pudo realizar la venta";
+                }else{
+                    return cantidadVenta;
+                }
+            }
+        }
+        function RegistroVenta(){ //método para poder gestionar las ventas
+            producto=prompt("Introduzca el nombre de su producto");
+            switch (producto) {
+                case nombreProducto1:
+                    cantidadDeVenta=compruebaCantidad(stockProducto1,validaDato(prompt("Introduce la cantidad"),false));
+                    stockProducto1-=cantidadDeVenta;
+                    break;
+                case nombreProducto2:
+                    cantidadDeVenta=compruebaCantidad(stockProducto2,validaDato(prompt("Introduce la cantidad"),false));
+                    stockProducto2-=cantidadDeVenta;
+                    
+                    break;
+                case nombreProducto3:
+                    cantidadDeVenta=compruebaCantidad(stockProducto3,validaDato(prompt("Introduce la cantidad"),false));
+                    stockProducto3-=cantidadDeVenta;
+                    
+                    break;    
+                default:
+                    break;
+            }
+
+        }
+
+        function cambiaPrecio(){
+            producto=prompt("Introduzca el producto a buscar");
+            switch (producto) {
+                case nombreProducto1:
+                    precioPruducto1=validaDato(prompt("Introduzca la cantidad"),false);
+                    break;
+                case nombreProducto2:
+                    precioPruducto2=validaDato(prompt("Introduzca la cantidad"),false);
+                    break;
+                case nombreProducto3:
+                    precioPruducto3=validaDato(prompt("Introduzca la cantidad"),false);
+                    break;    
+                default:
+                    break;
+            }
+        }
+        pruebaProductos();
+        //inicioPrograma(); método funcionando
+        menu();// método funcional
+        //inventario();
+        //añadirStock();
+        //inicioPrograma();
+
+        
+        
+    </script>
+</head>
+<body>
+    <h1>Examen entorno cliente JS</h1>
+    <br>
+    <h2>Recarga con F5 para volver a iniciar el programa</h2>
+</body>
+</html>
