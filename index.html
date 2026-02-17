@@ -1,177 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<!-- saved from url=(0032)http://127.0.0.1:5501/index.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Mi Blog Personal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script >
-        //indicamos las variables para nuestro producto
-        var nombreProducto1=0, nombreProducto2=0, nombreProducto3=0;
-        var precioPruducto1=0, precioPruducto2=0, precioPruducto3=0;
-        var stockProducto1=0, stockProducto2=0, stockProducto3=0;
-        var historial="Historial:";
-
-        function inicioPrograma(){ //Esta funcion es el primer paso para poner el programa en funcionamiento
-            alert("Empezaremos a registrar los producto de la página");
-            alert("Primer producto:");
-            registroProducto(nombreProducto1,precioPruducto1,stockProducto1);
-            alert("Segundo producto:");
-            registroProducto(nombreProducto2,precioPruducto2,stockProducto2);
-            alert("Tercer producto:");
-            registroProducto(nombreProducto3,precioPruducto3,stockProducto3);
-            menu();
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
         }
-        function validaDato(elDato, String){ //String es un booleano del tipo de dato a validar
-            if(String){
-                return elDato;
-            }else{
-                while(isNaN(elDato)){
-                    elDato=prompt("No has introducido un número");
-                    
-                }
-                return parseFloat(elDato);
+
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(90deg, #141e30, #243b55);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        header h1 {
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            padding: 2rem;
+            display: grid;
+            gap: 2rem;
+        }
+
+        /* Sección principal (habilidades + bio) */
+        .contenido-principal {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contenido-principal article {
+            flex: 1;
+            min-width: 280px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contenido-principal h2 {
+            margin-bottom: 1rem;
+            color: #2a5298;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 10px;
+        }
+
+        /* Sección foto + info */
+        .perfil {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 2rem;
+            align-items: center;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .perfil img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            margin-top: 2rem;
+            background: #141e30;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .perfil {
+                grid-template-columns: 1fr;
+                text-align: center;
             }
         }
-        function registroProducto(nombre,precio,cantidad) { //Esta funcion nos registrara todos los productos
-            alert("Registro de producto");
-            nombre=validaDato(prompt("introduzca el nombre de su producto"),true);
-            precio=validaDato(prompt("Introduzca el precio de su producto N.N"),false);
-            cantidad=parseInt(validaDato(prompt("Introduzca la cantidad de este producto"),false));
-        }
-        
-        function pruebaProductos(){ //Método de testeo de los productos
-            nombreProducto1="camisetas"; nombreProducto2="zapas"; nombreProducto3="corbatas";
-            precioPruducto1=33.3; precioPruducto2=10.2; precioPruducto3=444.4;
-            stockProducto1=3; stockProducto2=40; stockProducto3=444;
-        }
-
-        function menu(){ // El menu principal de programa
-            salida=false;
-            alert("Una vez introduccido los productos ya esta arrancado el programa, bienvenido")
-            do {
-                alert("Elija una de las opciones:\nA: ver inventario\nB: Añadir Stock\nC: Registro de venta"
-                    +"\nD: Historial de movimientos\nE: Cambia precio producto")
-                switch (prompt("Elija:")) {
-                    case "A":
-                        inventario();
-                        break;
-                    case "B":
-                        añadirStock();
-                        break;
-                    case "C":
-                        RegistroVenta();
-                        break;
-                    case "D":
-                        alert(historial);
-                        break;
-                    case "E":
-                        cambiaPrecio();
-                        break;                
-                    
-                    default:
-                        alert("No has elegido una opción válida");
-                        break;
-                }
-            } while (!salida);
-
-        }
-
-        function inventario(){ //Muestra del almacen
-            alert("Producto 1: \nNombre: "+ nombreProducto1+"\nPrecio: "+precioPruducto1+"\nCantidad: " +stockProducto1+
-            "Producto 2: \nNombre: "+ nombreProducto2+"\nPrecio: "+precioPruducto2+"\nCantidad: " +stockProducto2+
-            "Producto 3: \nNombre: "+ nombreProducto3+"\nPrecio: "+precioPruducto3+"\nCantidad: " +stockProducto3);
-        }
-
-        function añadirStock(){
-            let producto=prompt("Menciona el producto al que le quieres añadir stock");
-            switch (producto) {
-                case nombreProducto1:
-                    stockProducto1+=validaDato(prompt("Indica que cantidad quieres añadir"),false);
-                    historial+="\n Se ha cambiado el stock de: " +nombreProducto1;
-                    break;
-                case nombreProducto2:
-                    stockProducto2+=validaDato(prompt("Indica que cantidad quieres añadir"),false);
-                    historial+="\n Se ha cambiado el stock de: " +nombreProducto2;
-                    break;
-                
-                case nombreProducto3:
-                    stockProducto3+=validaDato(prompt("Indica que cantidad quieres añadir"),false);
-                    historial+="\n Se ha cambiado el stock de: "+nombreProducto3;
-                    break;    
-            
-                default:
-                    alert("Producto no encontrado");
-                    historial+="\nNo se a encontrado el producto"
-                    break;
-            }
-
-        }
-        function compruebaCantidad(cantidadProducto,cantidadVenta){
-            if(cantidadVenta<0){
-                alert("No puedes vender una cantidad negativa");
-                info+="\nSe intento hacer una venta negativa (¿En que estabas pensando?)";
-            }else{
-                if((cantidadProducto-cantidadVenta)<0){
-                    alert("No puedes vender mas del stock que tienes");
-                    info+="\nNo se pudo realizar la venta";
-                }else{
-                    return cantidadVenta;
-                }
-            }
-        }
-        function RegistroVenta(){ //método para poder gestionar las ventas
-            producto=prompt("Introduzca el nombre de su producto");
-            switch (producto) {
-                case nombreProducto1:
-                    cantidadDeVenta=compruebaCantidad(stockProducto1,validaDato(prompt("Introduce la cantidad"),false));
-                    stockProducto1-=cantidadDeVenta;
-                    break;
-                case nombreProducto2:
-                    cantidadDeVenta=compruebaCantidad(stockProducto2,validaDato(prompt("Introduce la cantidad"),false));
-                    stockProducto2-=cantidadDeVenta;
-                    
-                    break;
-                case nombreProducto3:
-                    cantidadDeVenta=compruebaCantidad(stockProducto3,validaDato(prompt("Introduce la cantidad"),false));
-                    stockProducto3-=cantidadDeVenta;
-                    
-                    break;    
-                default:
-                    break;
-            }
-
-        }
-
-        function cambiaPrecio(){
-            producto=prompt("Introduzca el producto a buscar");
-            switch (producto) {
-                case nombreProducto1:
-                    precioPruducto1=validaDato(prompt("Introduzca la cantidad"),false);
-                    break;
-                case nombreProducto2:
-                    precioPruducto2=validaDato(prompt("Introduzca la cantidad"),false);
-                    break;
-                case nombreProducto3:
-                    precioPruducto3=validaDato(prompt("Introduzca la cantidad"),false);
-                    break;    
-                default:
-                    break;
-            }
-        }
-        pruebaProductos();
-        //inicioPrograma(); método funcionando
-        menu();// método funcional
-        //inventario();
-        //añadirStock();
-        //inicioPrograma();
-
-        
-        
-    </script>
+    </style>
 </head>
+
 <body>
-    <h1>Examen entorno cliente JS</h1>
-    <br>
-    <h2>Recarga con F5 para volver a iniciar el programa</h2>
-</body>
-</html>
+
+    <header>
+        <h1>Mi Blog Personal</h1>
+        <p>Desarrollador en formación | Tecnología | Aprendizaje continuo</p>
+    </header>
+
+    <main>
+
+        <section class="contenido-principal">
+
+            <article>
+                <h2>Tecnologías y Habilidades</h2>
+                <ul>
+                    <li>HTML5 ,CSS3 y JS</li>
+                    <li>Vue.js y Node</li>
+                    <li>PHP</li>
+                    <li>Java</li>
+                    <li>SQL y Bases de Datos</li>
+                    <li>Git y GitHub</li>
+                </ul>
+            </article>
+
+            <article>
+                <h2>Sobre mí</h2>
+                <p>
+                    Soy estudiante del área de desarrollo y sistemas informáticos.
+                    Me apasiona la tecnología, la programación y el aprendizaje constante.
+                    Actualmente estoy mejorando mis habilidades en desarrollo web
+                    y administración de sistemas.
+                </p>
+            </article>
+
+        </section>
+
+        <section class="perfil">
+            <img src="http://127.0.0.1:5501/index.html" alt="Foto personal">
+            <div>
+                <h2>Información Personal</h2>
+                <p><strong>Nombre:</strong> Iván Martín García</p>
+                <p><strong>Edad:</strong> 21 años</p>
+                <p><strong>Ubicación:Ciempozuelos Madrid</strong> España</p>
+                <p><strong>Especialidad:</strong> Desarrollo Web y BBDD</p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>Contacto: imagar2025@gmail.com | LinkedIn:www.linkedin.com/in/ivan-martin-garcia22 | GitHub:
+            https://github.com/imagar2025-web</p>
+    </footer>
+
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+
+</body></html>
